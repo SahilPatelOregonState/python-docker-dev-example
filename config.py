@@ -21,7 +21,7 @@ class Settings(BaseSettings):
 
     @model_validator(mode="before")
     @classmethod
-    def check_postgres_password(cls, data: Any) -> Any:
+    def check_postgres_password(cls, data: dict[str, Any]) -> dict[str, Any]:
         """Validate that either POSTGRES_PASSWORD
         or POSTGRES_PASSWORD_FILE is set."""
         if isinstance(data, dict):
