@@ -22,13 +22,17 @@ class Settings(BaseSettings):
     @model_validator(mode="before")
     @classmethod
     def check_postgres_password(cls, data: Any) -> Any:
-        """Validate that either POSTGRES_PASSWORD or POSTGRES_PASSWORD_FILE is set."""
+        """Validate that either POSTGRES_PASSWORD
+          or POSTGRES_PASSWORD_FILE is set."""
         if isinstance(data, dict):
-            password_file: str | None = data.get("POSTGRES_PASSWORD_FILE")  # type: ignore
-            password: str | None = data.get("POSTGRES_PASSWORD")  # type: ignore
+            password_file: str | None = data.get(
+                "POSTGRES_PASSWORD_FILE")  # type: ignore
+            password: str | None = data.get(
+                "POSTGRES_PASSWORD")  # type: ignore
             if password_file is None and password is None:
                 raise ValueError(
-                    "At least one of POSTGRES_PASSWORD_FILE and POSTGRES_PASSWORD must be set."
+                    "At least one of POSTGRES_PASSWORD_FILE"
+                    " and POSTGRES_PASSWORD must be set."
                 )
         return data  # type: ignore
 
