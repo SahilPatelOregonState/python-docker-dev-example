@@ -60,4 +60,3 @@ volumes:
 secrets:
   db-password:
     file: /home/sahilvpatel1998/personal_projects/learning_docker/python-docker-dev-example/db/password.txt
-
