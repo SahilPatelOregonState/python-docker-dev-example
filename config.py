@@ -1,5 +1,5 @@
 import os
-from typing import Any
+from typing import Any, cast
 
 from pydantic import (
     PostgresDsn,
@@ -26,9 +26,11 @@ class Settings(BaseSettings):
         or POSTGRES_PASSWORD_FILE is set."""
         if isinstance(data, dict):
             # type: ignore
-            password_file: str | None = data.get("POSTGRES_PASSWORD_FILE")
+            password_file: str | None = cast(
+                str | None, data.get("POSTGRES_PASSWORD_FILE")
+            )
             # type: ignore
-            password: str | None = data.get("POSTGRES_PASSWORD")
+            password: str | None = cast(str | None, data.get("POSTGRES_PASSWORD"))
             if password_file is None and password is None:
                 raise ValueError(
                     "At least one of POSTGRES_PASSWORD_FILE"
