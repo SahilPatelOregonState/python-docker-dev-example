@@ -3,7 +3,13 @@ name: Build and push Docker image
 on:
   push:
     branches:
-      - main
+      - '**'
+    paths:
+      - '**.py'
+      - 'pyproject.toml'
+  pull_request:
+    branches:
+      - '**'
 
 jobs:
   lint-test:
